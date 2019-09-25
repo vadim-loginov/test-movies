@@ -8,6 +8,13 @@ $toolbarHeightMobile: 56px
   left: 0
   right: 0
 
+.app-component:not(.app-component--is-mobile)
+  .repo-link
+    margin-left: auto
+
+  .app-component__logo
+    margin-right: 20px
+
 .app-component--is-mobile
   .app-component__toolbar
     position: fixed
@@ -16,7 +23,8 @@ $toolbarHeightMobile: 56px
   .app-component__sidenav-container
     top: $toolbarHeightMobile
 
-  .app-logo
+  .app-logo,
+  .app-component__logo
     margin: 0 auto
 
 
