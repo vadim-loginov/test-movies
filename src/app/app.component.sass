@@ -1,0 +1,28 @@
+$toolbarHeightDesktop: 64px
+$toolbarHeightMobile: 56px
+
+.app-component
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+.app-component--is-mobile
+  .app-component__toolbar
+    position: fixed
+    z-index: 2
+
+  .app-component__sidenav-container
+    top: $toolbarHeightMobile
+
+  .app-logo
+    margin: 0 auto
+
+
+.app-component__sidenav-container
+  position: absolute
+  top: $toolbarHeightDesktop
+  bottom: 0
+  left: 0
+  right: 0
