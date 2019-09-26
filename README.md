@@ -1,6 +1,6 @@
 # AngularMovies
 
-https://vloginov.github.io/angular-movies/
+Demo https://vloginov.github.io/angular-movies/
 
 ## Development server
 
