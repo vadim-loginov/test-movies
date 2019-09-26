@@ -1,11 +1,12 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MediaMatcherService } from './services/media-matcher/media-matcher.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
 })
 export class AppComponent implements OnDestroy {
   @ViewChild('sidenav', { static: false }) sidenav;
@@ -16,9 +17,11 @@ export class AppComponent implements OnDestroy {
   mainMenuLinks = [
     {
       title: 'Home',
+      link: '/movies',
     },
     {
-      title: 'Favorite books'
+      title: 'Favorite books',
+      link: '/favourites',
     }
   ];
 
