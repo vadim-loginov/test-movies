@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MovieListComponent } from './components/movie-list/movie-list.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
-import { FavouritesComponent } from './components/favourites/favourites.component';
+import { MovieDetailsComponent } from './feature-modules/movie-details/components/movie-details/movie-details.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MovieListComponent } from './feature-modules/movie-list/components/movie-list/movie-list.component';
+import { FavouriteMoviesComponent } from './feature-modules/favourite-movies/components/favourite-movies/favourite-movies.component';
 
 
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'favourites',
-    component: FavouritesComponent,
+    component: FavouriteMoviesComponent,
   },
   {
     path: '**',

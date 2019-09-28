@@ -5,17 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
-import { MovieListComponent } from './components/movie-list/movie-list.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
-import { FavouritesComponent } from './components/favourites/favourites.component';
+
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
+import { MovieListModule } from './feature-modules//movie-list/movie-list.module';
+import { MovieDetailsModule } from './feature-modules/movie-details/movie-details.module';
+import { FavouriteMoviesModule } from './feature-modules/favourite-movies/favourite-movies.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MovieListComponent,
-    MovieDetailsComponent,
-    FavouritesComponent,
     PageNotFoundComponent,
   ],
   imports: [
@@ -23,6 +22,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    MovieListModule,
+    MovieDetailsModule,
+    FavouriteMoviesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

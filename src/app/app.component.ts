@@ -20,7 +20,7 @@ export class AppComponent implements OnDestroy {
       link: '/movies',
     },
     {
-      title: 'Favorite books',
+      title: 'Favorite movies',
       link: '/favourites',
     }
   ];
