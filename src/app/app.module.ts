@@ -19,12 +19,14 @@ import { FavouriteMoviesModule } from './feature-modules/favourite-movies/favour
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+
     MovieListModule,
     MovieDetailsModule,
     FavouriteMoviesModule,
+
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
