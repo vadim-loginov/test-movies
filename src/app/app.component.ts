@@ -1,18 +1,20 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { MediaMatcherService } from './services/media-matcher/media-matcher.service';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
+import { MediaMatcherService } from './services/media-matcher.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { bus, BusEvent } from './services/bus.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav', { static: false }) sidenav;
 
   mobileQuerySubscription: Subscription;
   isMobile: boolean;
+  loading: boolean;
+  subscriptions: Subscription[] = [];
 
   mainMenuLinks = [
     {
@@ -27,11 +29,36 @@ export class AppComponent implements OnDestroy {
 
   constructor(
     private mediaMatcherService: MediaMatcherService,
-  ) {
-    this.mobileQuerySubscription = this.mediaMatcherService.onMobileQueryChange
-      .subscribe((evt: MediaQueryListEvent) => {
-        this.isMobile = evt.matches;
-      });
+  ) {}
+
+  ngOnInit() {
+    const loadingModules = [];
+
+    this.subscriptions.push(
+      bus.subscribe((ev: BusEvent) => {
+        if (ev.action === 'module-loading-start') {
+          this.loading = true;
+          loadingModules.push(ev.data);
+        } else if (ev.action === 'module-loading-end') {
+          const moduleIndex = loadingModules.indexOf(ev.data);
+
+          if (moduleIndex !== -1) {
+            loadingModules.splice(moduleIndex, 1);
+          }
+
+          if (!loadingModules.length) {
+            this.loading = false;
+          }
+        }
+      })
+    );
+
+    this.subscriptions.push(
+      this.mediaMatcherService.onMobileQueryChange
+        .subscribe((evt: MediaQueryListEvent) => {
+          this.isMobile = evt.matches;
+        }),
+    );
 
     this.isMobile = this.mediaMatcherService.mobileQuery.matches;
   }
@@ -41,6 +68,6 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.mobileQuerySubscription.unsubscribe();
+    this.subscriptions.forEach((subscription) => { subscription.unsubscribe(); });
   }
 }

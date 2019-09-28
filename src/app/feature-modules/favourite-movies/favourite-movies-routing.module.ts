@@ -6,7 +6,7 @@ import { FavouriteMoviesComponent } from './components/favourite-movies/favourit
 
 const routes: Routes = [
   {
-    path: 'favourites',
+    path: '',
     component: FavouriteMoviesComponent,
   },
 ];
