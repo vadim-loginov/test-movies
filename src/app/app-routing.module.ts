@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MovieListComponent } from './components/movie-list/movie-list.component';
-import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
-import { FavouritesComponent } from './components/favourites/favourites.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
+import { bus } from './services/bus.service';
 
 const routes: Routes = [
   {
@@ -14,16 +11,58 @@ const routes: Routes = [
     redirectTo: '/movies',
   },
   {
-    path: 'movies',
-    component: MovieListComponent,
+    path: 'favourites',
+    loadChildren: () => {
+      bus.emit({
+        action: 'module-loading-start',
+        data: 'FavouriteMoviesModule',
+      });
+
+      return import('./feature-modules/favourite-movies/favourite-movies.module')
+        .then(mod => mod.FavouriteMoviesModule)
+        .finally(() => {
+          bus.emit({
+            action: 'module-loading-end',
+            data: 'FavouriteMoviesModule',
+          });
+        });
+    },
   },
   {
     path: 'movies/:id',
-    component: MovieDetailsComponent,
+    loadChildren: () => {
+      bus.emit({
+        action: 'module-loading-start',
+        data: 'MovieDetailsModule',
+      });
+
+      return import('./feature-modules/movie-details/movie-details.module')
+        .then(mod => mod.MovieDetailsModule)
+        .finally(() => {
+          bus.emit({
+            action: 'module-loading-end',
+            data: 'MovieDetailsModule',
+          });
+        });
+    },
   },
   {
-    path: 'favourites',
-    component: FavouritesComponent,
+    path: 'movies',
+    loadChildren: () => {
+      bus.emit({
+        action: 'module-loading-start',
+        data: 'MovieListModule',
+      });
+
+      return import('./feature-modules/movie-list/movie-list.module')
+        .then(mod => mod.MovieListModule)
+        .finally(() => {
+          bus.emit({
+            action: 'module-loading-end',
+            data: 'MovieListModule',
+          });
+        });
+    },
   },
   {
     path: '**',
@@ -32,7 +71,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      useHash: true,
+      // preloadingStrategy: PreloadAllModules,
+    }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
