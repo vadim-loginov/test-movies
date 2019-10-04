@@ -34,6 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const loadingModules = [];
 
+    // Show loader while modules are loading
     this.subscriptions.push(
       bus.subscribe((ev: BusEvent) => {
         if (ev.action === 'module-loading-start') {

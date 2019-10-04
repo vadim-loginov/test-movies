@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieListService } from '../../services/movie-list.service';
 
 interface Movie {
   title: string;
@@ -26,9 +27,16 @@ export class MovieListComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private movieListService: MovieListService,
+  ) { }
 
   ngOnInit() {
+    this.movieListService.getList().subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
   }
 
 }

@@ -1,10 +1,13 @@
 <div class="movie-list">
-	<h1>Movie list</h1>
+	<app-movie-list-filter></app-movie-list-filter>
+	<div class="g-content">
+		<h1>Movie list</h1>
 
-	<div
-		*ngFor="let movie of movieList"
-	>
-		<a [routerLink]="['/movies', movie.id]">{{ movie.title }}</a>
+		<div
+			*ngFor="let movie of movieList"
+		>
+			<a [routerLink]="['/movies', movie.id]">{{ movie.title }}</a>
+		</div>
 	</div>
 </div>
 
