@@ -14,7 +14,7 @@ export class MovieListService {
   }
 
   searchMovies(query: string) {
-    return this.http.get(`${this.moduleConfig.api.searchMoviesUrl}?query=${query}&page=1&api_key=2cdb1b1199194ebc0348f30796fa41c8`, { observe: 'body' })
+    return this.http.get(`${this.moduleConfig.api.searchMoviesUrl}?query=${query}&page=1`, { observe: 'body' })
 
   }
 }

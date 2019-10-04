@@ -6,9 +6,15 @@ import {
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class NoopInterceptor implements HttpInterceptor {
+export class AppendPrefixUrlInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req);
+    const apiPrefix = 'https://api.themoviedb.org/3/';
+
+    const reqWithProperUrl = req.clone({
+      url: apiPrefix + req.url,
+    });
+
+    return next.handle(reqWithProperUrl);
   }
 }
