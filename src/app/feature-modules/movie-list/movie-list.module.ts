@@ -8,7 +8,7 @@ import { MovieListService } from './services/movie-list.service';
 import { MovieListFilterComponent } from './components/movie-list-filter/movie-list-filter.component';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MODULE_CONFIG, movieListConfig } from './movie-list.config';
+import { MovieListConfig } from './movie-list.config';
 import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
 
 
@@ -26,10 +26,7 @@ import { httpInterceptorProviders } from 'src/app/services/http-interceptors/htt
   ],
   providers: [
     MovieListService,
-    {
-      provide: MODULE_CONFIG,
-      useValue: movieListConfig,
-    },
+    MovieListConfig,
     httpInterceptorProviders,
   ]
 })
