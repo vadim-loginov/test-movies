@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MovieListRoutingModule } from './movie-list-routing.module';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
