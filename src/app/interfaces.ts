@@ -22,7 +22,7 @@ export interface IMovieSearchResult {
   total_results: number;
 }
 
-export interface IFilterColumn {
+export interface IMovieListColumn {
   id: string;
   name: string;
   selected: boolean;

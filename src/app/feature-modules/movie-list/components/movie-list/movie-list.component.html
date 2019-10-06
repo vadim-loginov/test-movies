@@ -3,33 +3,35 @@
 		class="movie-list__filter"
 		(search)="onFilterSearch($event)"
 		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
-		[columns]="columns.map(column => column.id)"
-		[selectedColumns]="columns.filter(column => column.selected)"
+		[columns]="columnNames"
+		[selectedColumns]="selectedColumnNames"
 	></app-movie-list-filter>
 
 	<div class="g-content movie-list__content">
 		<div class="movie-list__row movie-list__row--head" *ngIf="movieList.length">
 			<div
-				*ngFor="let column of columns"
+				*ngFor="let column of getSelectedColumns()"
 				class="movie-list__col movie-list__col--{{column.id}}"
-			>{{ column.Name }}</div>
+			>
+				{{ column.name }}
+			</div>
 		</div>
 		<div
 			class="movie-list__row"
 			*ngFor="let movie of movieList"
 		>
-			<div class="movie-list__col movie-list__col--poster">
+			<div class="movie-list__col movie-list__col--poster" *ngIf="columnSelected('poster')">
 				<a [routerLink]="['/movies', movie.id]">
 					<img *ngIf="!movie.poster_path" src="assets/no-poster.png" alt="">
 					<img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" alt="">
 				</a>
 			</div>
-			<div class="movie-list__col movie-list__col--title">{{ movie.title }}</div>
-			<div class="movie-list__col movie-list__col--language">{{ movie.original_language }}</div>
-			<div class="movie-list__col movie-list__col--release">{{ movie.release_date }}</div>
-			<div class="movie-list__col movie-list__col--genre">{{ movie.genre_ids }}</div>
-			<div class="movie-list__col movie-list__col--popularity">{{ movie.popularity }}</div>
-			<div class="movie-list__col movie-list__col--overview">{{ movie.overview }}</div>
+			<div class="movie-list__col movie-list__col--title" *ngIf="columnSelected('title')">{{ movie.title }}</div>
+			<div class="movie-list__col movie-list__col--language" *ngIf="columnSelected('language')">{{ movie.original_language }}</div>
+			<div class="movie-list__col movie-list__col--release" *ngIf="columnSelected('release')">{{ movie.release_date }}</div>
+			<div class="movie-list__col movie-list__col--genre" *ngIf="columnSelected('genre')">{{ movie.genre_ids }}</div>
+			<div class="movie-list__col movie-list__col--popularity" *ngIf="columnSelected('popularity')">{{ movie.popularity }}</div>
+			<div class="movie-list__col movie-list__col--overview" *ngIf="columnSelected('overview')">{{ movie.overview }}</div>
 		</div>
 	</div>
 

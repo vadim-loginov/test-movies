@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MovieListConfig } from '../movie-list.config';
-import { IFilterColumn } from 'src/app/interfaces';
+import { IMovieListColumn } from 'src/app/interfaces';
 
 @Injectable()
 export class MovieListService {
@@ -18,8 +18,8 @@ export class MovieListService {
     return this.http.get(`${this.moduleCongif.api.searchMoviesUrl}?query=${query}&page=${page}`, { observe: 'body' });
   }
 
-  getFilterColumns() {
-    const defaultFilterColumns: IFilterColumn[] = [
+  getColumns() {
+    const defaultFilterColumns: IMovieListColumn[] = [
       {
         id: 'poster',
         name: 'Poster',
@@ -43,16 +43,16 @@ export class MovieListService {
       {
         id: 'genre',
         name: 'Genre',
-        selected: true,
+        selected: false,
       },
       {
         id: 'popularity',
-        name: 'Populariyt',
+        name: 'Popularity',
         selected: true,
       },
       {
         id: 'overview',
-        name: 'Overvie',
+        name: 'Overview',
         selected: true,
       },
     ];

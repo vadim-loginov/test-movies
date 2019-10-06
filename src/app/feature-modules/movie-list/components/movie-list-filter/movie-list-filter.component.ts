@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { MovieListService } from '../../services/movie-list.service';
@@ -12,6 +12,7 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class MovieListFilterComponent implements OnInit, OnChanges {
   @Input() columns: string[];
+  @Input() selectedColumns: string[];
   @Output() search = new EventEmitter<{ query: string, searchResult: IMovieSearchResult }>();
   @Output() columnsSelectionChange = new EventEmitter<MatSelectChange>();
   queryControl = new FormControl('');
@@ -38,7 +39,7 @@ export class MovieListFilterComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges() {
-    this.columnsControl.setValue(this.columns);
+  ngOnChanges(changes: SimpleChanges) {
+    this.columnsControl.setValue(this.selectedColumns);
   }
 }
