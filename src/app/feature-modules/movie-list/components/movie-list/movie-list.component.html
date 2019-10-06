@@ -1,13 +1,45 @@
-<div class="movie-list">
-	<app-movie-list-filter></app-movie-list-filter>
-	<div class="g-content">
-		<h1>Movie list</h1>
+<div class="movie-list g-fill-parent">
+	<app-movie-list-filter
+		class="movie-list__filter"
+		(search)="onFilterSearch($event)"
+		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
+		[columns]="columns.map(column => column.id)"
+		[selectedColumns]="columns.filter(column => column.selected)"
+	></app-movie-list-filter>
 
+	<div class="g-content movie-list__content">
+		<div class="movie-list__row movie-list__row--head" *ngIf="movieList.length">
+			<div
+				*ngFor="let column of columns"
+				class="movie-list__col movie-list__col--{{column.id}}"
+			>{{ column.Name }}</div>
+		</div>
 		<div
+			class="movie-list__row"
 			*ngFor="let movie of movieList"
 		>
-			<a [routerLink]="['/movies', movie.id]">{{ movie.title }}</a>
+			<div class="movie-list__col movie-list__col--poster">
+				<a [routerLink]="['/movies', movie.id]">
+					<img *ngIf="!movie.poster_path" src="assets/no-poster.png" alt="">
+					<img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" alt="">
+				</a>
+			</div>
+			<div class="movie-list__col movie-list__col--title">{{ movie.title }}</div>
+			<div class="movie-list__col movie-list__col--language">{{ movie.original_language }}</div>
+			<div class="movie-list__col movie-list__col--release">{{ movie.release_date }}</div>
+			<div class="movie-list__col movie-list__col--genre">{{ movie.genre_ids }}</div>
+			<div class="movie-list__col movie-list__col--popularity">{{ movie.popularity }}</div>
+			<div class="movie-list__col movie-list__col--overview">{{ movie.overview }}</div>
 		</div>
+	</div>
+
+	<div class="movie-list__paginator" *ngIf="movieList.length">
+		<mat-paginator
+			(page)="onPaginatorChange($event)"
+			[length]="totalMovies"
+			[pageSize]="pageSize"
+			[pageSizeOptions]="[]">
+		</mat-paginator>
 	</div>
 </div>
 

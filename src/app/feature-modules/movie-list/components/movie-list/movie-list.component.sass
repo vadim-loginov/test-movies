@@ -1,0 +1,39 @@
+.movie-list
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-rows: 64px 1fr
+  grid-auto-rows: 56px
+
+.movie-list__content
+  overflow: auto
+
+.movie-list__row
+  min-height: 48px
+  display: flex
+
+  &--head
+    .movie-list__col
+      display: flex
+      align-items: center
+
+.movie-list__col
+  padding: 8px
+  flex-shrink: 0
+  border-bottom: 1px solid rgba(0,0,0,.12)
+
+.movie-list__col--title,
+.movie-list__col--release,
+.movie-list__col--genre,
+.movie-list__col--language,
+.movie-list__col--popularity
+  width: 80px
+
+.movie-list__col--poster
+  width: 96px
+
+.movie-list__col--release
+  width: 90px
+
+.movie-list__col--overview
+  flex-shrink: 1
+  min-width: 300px

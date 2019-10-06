@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { MovieListService } from '../../services/movie-list.service';
+import { IMovieSearchResult } from 'src/app/interfaces';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-movie-list-filter',
   templateUrl: './movie-list-filter.component.html',
   styleUrls: ['./movie-list-filter.component.sass']
 })
-export class MovieListFilterComponent implements OnInit {
+export class MovieListFilterComponent implements OnInit, OnChanges {
+  @Input() columns: string[];
+  @Output() search = new EventEmitter<{ query: string, searchResult: IMovieSearchResult }>();
+  @Output() columnsSelectionChange = new EventEmitter<MatSelectChange>();
   queryControl = new FormControl('');
+  columnsControl = new FormControl('');
 
   constructor(
     private movieListService: MovieListService,
@@ -25,10 +30,15 @@ export class MovieListFilterComponent implements OnInit {
         distinctUntilChanged(),
         switchMap(query => this.movieListService.searchMovies(query))
       )
-      .subscribe((response: any) => {
-        console.log(response);
-        // console.log(response.results.map(movie => movie.original_title));
+      .subscribe((searchResult: IMovieSearchResult) => {
+        this.search.emit({
+          query: this.queryControl.value,
+          searchResult,
+        });
       });
   }
 
+  ngOnChanges() {
+    this.columnsControl.setValue(this.columns);
+  }
 }

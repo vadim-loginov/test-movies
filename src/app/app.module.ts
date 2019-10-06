@@ -8,6 +8,7 @@ import { AngularMaterialModule } from './angular-material.module';
 
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { httpInterceptorProviders } from './services/http-interceptors/http-interceptors';
+import { AppConfig } from './app.config';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { httpInterceptorProviders } from './services/http-interceptors/http-inte
     AppRoutingModule,
   ],
   providers: [
+    AppConfig,
     httpInterceptorProviders,
   ],
   bootstrap: [AppComponent]

@@ -4,15 +4,17 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { AppConfig } from 'src/app/app.config';
 
 @Injectable()
 export class AppendPrefixUrlInterceptor implements HttpInterceptor {
+  constructor(
+    private appConfig: AppConfig
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiPrefix = 'https://api.themoviedb.org/3/';
-
     const reqWithProperUrl = req.clone({
-      url: apiPrefix + req.url,
+      url: this.appConfig.movieDbApiPrefix + req.url,
     });
 
     return next.handle(reqWithProperUrl);
