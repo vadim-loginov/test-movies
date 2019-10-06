@@ -3,6 +3,7 @@ import { MovieListService } from '../../services/movie-list.service';
 import { IMovieSearchResult, IMovieListColumn } from 'src/app/interfaces';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
 
 interface Movie {
   title: string;
@@ -26,6 +27,7 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private movieListService: MovieListService,
+    private userSettingsService: UserSettingsService,
   ) { }
 
   ngOnInit() {
@@ -57,6 +59,8 @@ export class MovieListComponent implements OnInit {
       column.selected = event.value.includes(column.name);
       return column;
     });
+
+    this.userSettingsService.selectedColumnIds = this.getSelectedColumnIds();
     console.log(this.columns);
   }
 
@@ -78,6 +82,12 @@ export class MovieListComponent implements OnInit {
 
   getSelectedColumnNames() {
     const reducer = (acc, curr) => acc.concat(curr.selected ? [curr.name] : []);
+
+    return this.columns ? this.columns.reduce(reducer, []) : [];
+  }
+
+  getSelectedColumnIds() {
+    const reducer = (acc, curr) => acc.concat(curr.selected ? [curr.id] : []);
 
     return this.columns ? this.columns.reduce(reducer, []) : [];
   }

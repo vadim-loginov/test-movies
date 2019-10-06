@@ -2,12 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MovieListConfig } from '../movie-list.config';
 import { IMovieListColumn } from 'src/app/interfaces';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
 
 @Injectable()
 export class MovieListService {
   constructor(
     private http: HttpClient,
     private moduleCongif: MovieListConfig,
+    private userSettingsService: UserSettingsService,
   ) {}
 
   getList() {
@@ -19,7 +21,7 @@ export class MovieListService {
   }
 
   getColumns() {
-    const defaultFilterColumns: IMovieListColumn[] = [
+    const defaultColumns: IMovieListColumn[] = [
       {
         id: 'poster',
         name: 'Poster',
@@ -56,6 +58,15 @@ export class MovieListService {
         selected: true,
       },
     ];
-    return Promise.resolve(defaultFilterColumns);
+    const selectedColumnIdsSettings = this.userSettingsService.selectedColumnIds;
+
+    if (selectedColumnIdsSettings) {
+      return Promise.resolve(defaultColumns.map((column) => ({
+        ...column,
+        selected: selectedColumnIdsSettings.includes(column.id),
+      })));
+    } else {
+      return Promise.resolve(defaultColumns);
+    }
   }
 }

@@ -6,6 +6,13 @@ import { Injectable } from '@angular/core';
 export class UserSettingsService {
   private settings;
 
+  get selectedColumnIds() {
+    return this.get('selectedColumnIds');
+  }
+  set selectedColumnIds(data) {
+    this.save('selectedColumnIds', data);
+  }
+
   get(settingName) {
     const savedSettings = localStorage.getItem('userSettings');
 
