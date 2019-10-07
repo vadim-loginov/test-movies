@@ -13,7 +13,7 @@ export class MovieListService {
 
   constructor(
     private http: HttpClient,
-    private moduleCongif: MovieListConfig,
+    private movieListCongif: MovieListConfig,
     private userSettingsService: UserSettingsService,
   ) {}
 
@@ -29,11 +29,11 @@ export class MovieListService {
   }
 
   // getList() {
-  //   return this.http.get(this.moduleCongif.api.getMovieList);
+  //   return this.http.get(this.movieListCongif.api.getMovieList);
   // }
 
   searchMovies(query: string, page: number = 1) {
-    return this.http.get(`${this.moduleCongif.api.searchMoviesUrl}?query=${query}&page=${page}`, { observe: 'body' });
+    return this.http.get(`${this.movieListCongif.api.searchMoviesUrl}?query=${query}&page=${page}`, { observe: 'body' });
   }
 
   getColumns() {
@@ -87,7 +87,7 @@ export class MovieListService {
   }
 
   private getGenres() {
-    return this.http.get(this.moduleCongif.api.getGenres).toPromise()
+    return this.http.get(this.movieListCongif.api.getGenres).toPromise()
       .then((resp: any) => {
         this.genres = resp.genres;
 

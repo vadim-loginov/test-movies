@@ -1,10 +1,14 @@
-<p>movie-details works!</p>
-<p>{{id}}</p>
-<pre>
-	{{movie | json}}
-</pre>
 <mat-spinner
 	class="g-center"
 	*ngIf="loading"
 	diameter="60"
 ></mat-spinner>
+
+<div class="movie-details" *ngIf="!loading">
+	<div class="movie-details__poster">
+
+	</div>
+	<div class="movie-details__info">
+		{{ movie | json }}
+	</div>
+</div>

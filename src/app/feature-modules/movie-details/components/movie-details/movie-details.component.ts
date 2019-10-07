@@ -25,12 +25,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       this.id = params.get('id');
       this.loading = true;
 
-      this.subscriptions.push(
-        this.movieService.getMovieById(this.id).subscribe((movie) => {
-          this.movie = movie;
-          this.loading = false;
-        })
-      );
+      this.movieService.getMovieById(this.id).then((movie) => {
+        console.log('movie', movie);
+        this.movie = movie;
+        this.loading = false;
+      });
     });
   }
 
