@@ -31,14 +31,9 @@ export class MovieListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.movieListService.getList().subscribe(
-      (data) => {
-        console.log(data);
-      }
-    );
-    this.movieListService.getColumns()
-      .then((columns) => {
-        this.columns = columns;
+    this.movieListService.init()
+      .then(() => {
+        this.columns = this.movieListService.getColumns();
         this.columnNames = this.getColumnNames();
         this.selectedColumnNames = this.getSelectedColumnNames();
       });
@@ -93,8 +88,12 @@ export class MovieListComponent implements OnInit {
   }
 
   columnSelected(columnId) {
-    const column = this.columns.find(column => column.id === columnId);
+    const column = this.columns.find(col => col.id === columnId);
 
     return column.selected;
+  }
+
+  genresToNames(genreIds) {
+    return genreIds.map((genreId) => this.movieListService.genreIdNameMap[genreId]);
   }
 }

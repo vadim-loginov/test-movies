@@ -27,3 +27,8 @@ export interface IMovieListColumn {
   name: string;
   selected: boolean;
 }
+
+export interface IGenre {
+  id: number;
+  name: string;
+}

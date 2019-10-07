@@ -16,6 +16,7 @@
 				{{ column.name }}
 			</div>
 		</div>
+
 		<div
 			class="movie-list__row"
 			*ngFor="let movie of movieList"
@@ -29,7 +30,9 @@
 			<div class="movie-list__col movie-list__col--title" *ngIf="columnSelected('title')">{{ movie.title }}</div>
 			<div class="movie-list__col movie-list__col--language" *ngIf="columnSelected('language')">{{ movie.original_language }}</div>
 			<div class="movie-list__col movie-list__col--release" *ngIf="columnSelected('release')">{{ movie.release_date }}</div>
-			<div class="movie-list__col movie-list__col--genre" *ngIf="columnSelected('genre')">{{ movie.genre_ids }}</div>
+			<div class="movie-list__col movie-list__col--genre" *ngIf="columnSelected('genre')">
+				<div *ngFor="let genre of genresToNames(movie.genre_ids)">{{ genre }}</div>
+			</div>
 			<div class="movie-list__col movie-list__col--popularity" *ngIf="columnSelected('popularity')">{{ movie.popularity }}</div>
 			<div class="movie-list__col movie-list__col--overview" *ngIf="columnSelected('overview')">{{ movie.overview }}</div>
 		</div>

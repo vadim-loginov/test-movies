@@ -1,20 +1,36 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MovieListConfig } from '../movie-list.config';
-import { IMovieListColumn } from 'src/app/interfaces';
+import { IMovieListColumn, IGenre } from 'src/app/interfaces';
 import { UserSettingsService } from 'src/app/services/user-settings.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MovieListService {
+  private initialized = false;
+  genres = null;
+  genreIdNameMap = {};
+
   constructor(
     private http: HttpClient,
     private moduleCongif: MovieListConfig,
     private userSettingsService: UserSettingsService,
   ) {}
 
-  getList() {
-    return this.http.get(this.moduleCongif.api.getMovieList);
+  init(): Promise<undefined> {
+    if (this.initialized) {
+      return Promise.resolve(undefined);
+    }
+
+    return this.getGenres().then((e) => {
+      this.initialized = true;
+      return undefined;
+    });
   }
+
+  // getList() {
+  //   return this.http.get(this.moduleCongif.api.getMovieList);
+  // }
 
   searchMovies(query: string, page: number = 1) {
     return this.http.get(`${this.moduleCongif.api.searchMoviesUrl}?query=${query}&page=${page}`, { observe: 'body' });
@@ -61,12 +77,23 @@ export class MovieListService {
     const selectedColumnIdsSettings = this.userSettingsService.selectedColumnIds;
 
     if (selectedColumnIdsSettings) {
-      return Promise.resolve(defaultColumns.map((column) => ({
+      return defaultColumns.map((column) => ({
         ...column,
         selected: selectedColumnIdsSettings.includes(column.id),
-      })));
+      }));
     } else {
-      return Promise.resolve(defaultColumns);
+      return defaultColumns;
     }
+  }
+
+  private getGenres() {
+    return this.http.get(this.moduleCongif.api.getGenres).toPromise()
+      .then((resp: any) => {
+        this.genres = resp.genres;
+
+        this.genres.forEach((genre) => {
+          this.genreIdNameMap[genre.id] = genre.name;
+        });
+      });
   }
 }
