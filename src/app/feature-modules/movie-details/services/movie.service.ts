@@ -62,6 +62,13 @@ export class MovieService {
 
   removeMovieTag(movieId, tag) {
     this.movieTags[movieId].tags.splice(this.movieTags[movieId].tags.indexOf(tag), 1);
+    this.removeUnusedMovieFromSettings(movieId);
     this.userSettings.movieTags = this.movieTags;
+  }
+
+  removeUnusedMovieFromSettings(movieId) {
+    if (!this.movieTags[movieId].tags.length) {
+      delete this.movieTags[movieId];
+    }
   }
 }
