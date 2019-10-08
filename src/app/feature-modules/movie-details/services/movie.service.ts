@@ -15,14 +15,18 @@ export class MovieService {
     return this.http.get<IMovie>(this.movieDetailsConfig.api.getMovieById + id).toPromise();
   }
 
-  getMovieTags(moveiId: number): Promise<any> {
+  getMovieTags(movieId: number): Promise<string[]> {
     const favourites = {
       854: {
         tags: ['one', 'two', 'three'],
       }
     };
 
-    return Promise.resolve(favourites[moveiId].tags);
+    if (movieId in favourites) {
+      return Promise.resolve(favourites[movieId].tags);
+    } else {
+      return Promise.resolve([]);
+    }
   }
 
   getUserTags(): Promise<string[]> {

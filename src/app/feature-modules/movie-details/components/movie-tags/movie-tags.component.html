@@ -1,4 +1,29 @@
-<div class="app-tags">
-	<p>tags: {{tags}}</p>
-	<p>allTags: {{allTags}}</p>
+<div class="movie-tags">
+	<mat-form-field class="movie-tags__chip-list">
+		<mat-chip-list #chipList aria-label="Tag selection">
+			<mat-chip
+				*ngFor="let tag of tags"
+				[selectable]="false"
+				[removable]="removable"
+				(removed)="remove(tag)"
+			>
+				{{tag}}
+				<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+			</mat-chip>
+			<input
+				[placeholder]="tags.length ? 'Tags' : 'Add tag...'"
+				#tagInput
+				[formControl]="tagCtrl"
+				[matAutocomplete]="auto"
+				[matChipInputFor]="chipList"
+				[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+				[matChipInputAddOnBlur]="addOnBlur"
+				(matChipInputTokenEnd)="add($event)">
+		</mat-chip-list>
+		<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+			<mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+				{{tag}}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
 </div>

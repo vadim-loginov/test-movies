@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { MovieTagsComponent } from './components/movie-tags/movie-tags.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MovieTagsComponent } from './components/movie-tags/movie-tags.component
     AngularMaterialModule,
     MovieDetailsRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     MovieService,
