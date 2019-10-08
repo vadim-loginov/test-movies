@@ -2,7 +2,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
+import {MatChipInputEvent, MatChipListChange} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -11,10 +11,11 @@ import {map, startWith} from 'rxjs/operators';
   templateUrl: './movie-tags.component.html',
   styleUrls: ['./movie-tags.component.sass']
 })
-export class MovieTagsComponent {
-  @Input() tags: string[];
+export class MovieTagsComponent implements OnInit {
+  @Input() movieTags: string[];
   @Input() allTags: string[];
 
+  @Output() added = new EventEmitter<string>();
   @Output() removed = new EventEmitter<string>();
 
   @ViewChild('tagInput', {static: false}) tagInput: ElementRef<HTMLInputElement>;
@@ -27,6 +28,7 @@ export class MovieTagsComponent {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
+  tags: string[];
 
   constructor() {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
@@ -35,9 +37,9 @@ export class MovieTagsComponent {
     );
   }
 
-  // ngOnInit() {
-  //   this.allTags = this.userTags.slice();
-  // }
+  ngOnInit() {
+    this.tags = this.movieTags.slice();
+  }
 
   add(event: MatChipInputEvent): void {
     // Add tag only when MatAutocomplete is not open
@@ -48,7 +50,12 @@ export class MovieTagsComponent {
 
       // Add our tag
       if ((value || '').trim()) {
-        this.tags.push(value.trim());
+        const valueTrimmed = value.trim();
+
+        if (this.tags.indexOf(valueTrimmed) === -1) {
+          this.tags.push(valueTrimmed);
+          this.added.emit(valueTrimmed);
+        }
       }
 
       // Reset the input value
@@ -70,7 +77,11 @@ export class MovieTagsComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
+    if (this.tags.indexOf(event.option.viewValue) === -1) {
+      this.tags.push(event.option.viewValue);
+      this.added.emit(event.option.viewValue);
+    }
+
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }

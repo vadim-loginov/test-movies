@@ -43,4 +43,12 @@ export class MovieDetailsComponent implements OnInit {
         this.loading = false;
       });
   }
+
+  onAddTag(tag: string) {
+    this.movieService.addMovieTag(this.movie.id, tag);
+  }
+
+  onRemoveTag(tag: string) {
+    this.movieService.removeMovieTag(this.movie.id, tag);
+  }
 }

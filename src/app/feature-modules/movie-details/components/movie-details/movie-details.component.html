@@ -17,8 +17,10 @@
 		<p><strong>Сборы в мире:</strong> {{ movie.revenue | currency:'USD' }}</p>
 		<p><a href="https://www.imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a></p>
 		<app-movie-tags
-			[tags]="movieTags"
+			[movieTags]="movieTags"
 			[allTags]="userTags"
+			(added)="onAddTag($event)"
+			(removed)="onRemoveTag($event)"
 		></app-movie-tags>
 	</div>
 </div>

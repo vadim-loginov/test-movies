@@ -6,14 +6,16 @@ import { Injectable } from '@angular/core';
 export class UserSettingsService {
   private settings;
 
-  get selectedColumnIds() {
-    return this.get('selectedColumnIds');
-  }
-  set selectedColumnIds(data) {
-    this.save('selectedColumnIds', data);
-  }
+  get selectedColumnIds() { return this.get('selectedColumnIds'); }
+  set selectedColumnIds(data) { this.save('selectedColumnIds', data); }
 
-  get(settingName) {
+  get movieTags() { return this.get('movieTags'); }
+  set movieTags(data) { this.save('movieTags', data); }
+
+  get userTags() { return this.get('userTags'); }
+  set userTags(data) { this.save('userTags', data); }
+
+  private get(settingName) {
     const savedSettings = localStorage.getItem('userSettings');
 
     if (savedSettings === null) {
@@ -23,7 +25,7 @@ export class UserSettingsService {
     return JSON.parse(savedSettings)[settingName];
   }
 
-  save(settingName, data) {
+  private save(settingName, data) {
     const savedSettings = localStorage.getItem('userSettings');
     const savedSettingsObject = savedSettings === null ? {} : JSON.parse(savedSettings);
 
