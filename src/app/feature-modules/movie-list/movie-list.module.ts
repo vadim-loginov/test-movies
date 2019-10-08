@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MovieListRoutingModule } from './movie-list-routing.module';
@@ -10,6 +9,7 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovieListConfig } from './movie-list.config';
 import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
+import { AppCommonModule } from 'src/app/common/app-common.module';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { httpInterceptorProviders } from 'src/app/services/http-interceptors/htt
     MovieListFilterComponent,
   ],
   imports: [
-    CommonModule,
+    AppCommonModule,
     MovieListRoutingModule,
     HttpClientModule,
     AngularMaterialModule,

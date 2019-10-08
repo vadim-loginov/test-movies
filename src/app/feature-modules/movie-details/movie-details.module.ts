@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 
@@ -9,13 +8,16 @@ import { MovieService } from './services/movie.service';
 import { MovieDetailsConfig } from './movie-details.config';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
+import { AppCommonModule } from 'src/app/common/app-common.module';
+import { MovieTagsComponent } from './components/movie-tags/movie-tags.component';
 
 @NgModule({
   declarations: [
     MovieDetailsComponent,
+    MovieTagsComponent,
   ],
   imports: [
-    CommonModule,
+    AppCommonModule,
     AngularMaterialModule,
     MovieDetailsRoutingModule,
     HttpClientModule,

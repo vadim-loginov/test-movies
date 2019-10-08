@@ -1,0 +1,19 @@
+.movie-details
+  display: grid
+  padding-top: 16px
+  grid-template-columns: 154px 1fr
+  grid-column-gap: 16px
+
+  &__spinner-container
+    grid-column: 1/-1
+    grid-row: 1/-1
+    display: flex
+    justify-content: center
+
+  &__poster
+    grid-column: 1 span 1
+    grid-row: 1 span 1
+
+  &__info
+    grid-column: 2 span 1
+    grid-row: 1 span 1

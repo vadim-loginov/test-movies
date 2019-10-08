@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class MovieListService {
   private initialized = false;
+
   genres = null;
   genreIdNameMap = {};
 
@@ -17,23 +18,19 @@ export class MovieListService {
     private userSettingsService: UserSettingsService,
   ) {}
 
-  init(): Promise<undefined> {
+  init(): Promise<any> {
     if (this.initialized) {
-      return Promise.resolve(undefined);
+      return Promise.resolve();
     }
 
-    return this.getGenres().then((e) => {
-      this.initialized = true;
-      return undefined;
-    });
+    return this.getGenres()
+      .then((e) => {
+        this.initialized = true;
+      });
   }
 
-  // getList() {
-  //   return this.http.get(this.movieListCongif.api.getMovieList);
-  // }
-
   searchMovies(query: string, page: number = 1) {
-    return this.http.get(`${this.movieListCongif.api.searchMoviesUrl}?query=${query}&page=${page}`, { observe: 'body' });
+    return this.http.get(`${this.movieListCongif.api.searchMoviesUrl}?query=${query}&page=${page}`);
   }
 
   getColumns() {

@@ -87,7 +87,7 @@ export class MovieListComponent implements OnInit {
     return this.columns ? this.columns.reduce(reducer, []) : [];
   }
 
-  columnSelected(columnId) {
+  isColumnSelected(columnId): boolean {
     const column = this.columns.find(col => col.id === columnId);
 
     return column.selected;

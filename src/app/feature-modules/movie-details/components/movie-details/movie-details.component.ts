@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { MovieService } from '../../services/movie.service';
 
@@ -9,10 +8,10 @@ import { MovieService } from '../../services/movie.service';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.sass']
 })
-export class MovieDetailsComponent implements OnInit, OnDestroy {
-  id: string;
+export class MovieDetailsComponent implements OnInit {
   movie: any;
-  subscriptions: Subscription[] = [];
+  movieTags: string[];
+  userTags: string[];
   loading: boolean;
 
   constructor(
@@ -22,18 +21,26 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = params.get('id');
-      this.loading = true;
-
-      this.movieService.getMovieById(this.id).then((movie) => {
-        console.log('movie', movie);
-        this.movie = movie;
-        this.loading = false;
-      });
+      this.init(params.get('id'));
     });
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => { subscription.unsubscribe(); });
+  private init(movieId) {
+    this.loading = true;
+
+    Promise.all([
+      this.movieService.getMovieById(movieId),
+      this.movieService.getMovieTags(movieId),
+      this.movieService.getUserTags(),
+    ])
+      .then((resolved) => {
+        this.movie = resolved[0];
+        this.movieTags = resolved[1];
+        this.userTags = resolved[2];
+        console.log('MovieDetailsComponent', this);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 }

@@ -21,20 +21,22 @@
 			class="movie-list__row"
 			*ngFor="let movie of movieList"
 		>
-			<div class="movie-list__col movie-list__col--poster" *ngIf="columnSelected('poster')">
+			<div class="movie-list__col movie-list__col--poster" *ngIf="isColumnSelected('poster')">
 				<a [routerLink]="['/movies', movie.id]">
 					<img *ngIf="!movie.poster_path" src="assets/no-poster.png" alt="">
-					<img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w92/' + movie.poster_path" alt="">
+					<img *ngIf="movie.poster_path" src="{{ movie.poster_path | poster}}" alt="">
 				</a>
 			</div>
-			<div class="movie-list__col movie-list__col--title" *ngIf="columnSelected('title')">{{ movie.title }}</div>
-			<div class="movie-list__col movie-list__col--language" *ngIf="columnSelected('language')">{{ movie.original_language }}</div>
-			<div class="movie-list__col movie-list__col--release" *ngIf="columnSelected('release')">{{ movie.release_date }}</div>
-			<div class="movie-list__col movie-list__col--genre" *ngIf="columnSelected('genre')">
+			<div class="movie-list__col movie-list__col--title" *ngIf="isColumnSelected('title')">
+				<a [routerLink]="['/movies', movie.id]"> {{ movie.title }}</a>
+			</div>
+			<div class="movie-list__col movie-list__col--language" *ngIf="isColumnSelected('language')">{{ movie.original_language }}</div>
+			<div class="movie-list__col movie-list__col--release" *ngIf="isColumnSelected('release')">{{ movie.release_date | date }}</div>
+			<div class="movie-list__col movie-list__col--genre" *ngIf="isColumnSelected('genre')">
 				<div *ngFor="let genre of genresToNames(movie.genre_ids)">{{ genre }}</div>
 			</div>
-			<div class="movie-list__col movie-list__col--popularity" *ngIf="columnSelected('popularity')">{{ movie.popularity }}</div>
-			<div class="movie-list__col movie-list__col--overview" *ngIf="columnSelected('overview')">{{ movie.overview }}</div>
+			<div class="movie-list__col movie-list__col--popularity" *ngIf="isColumnSelected('popularity')">{{ movie.popularity }}</div>
+			<div class="movie-list__col movie-list__col--overview" *ngIf="isColumnSelected('overview')">{{ movie.overview }}</div>
 		</div>
 	</div>
 
