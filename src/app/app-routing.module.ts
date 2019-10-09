@@ -12,57 +12,61 @@ const routes: Routes = [
   },
   {
     path: 'favourites',
-    loadChildren: () => {
-      bus.emit({
-        action: 'module-loading-start',
-        data: 'FavouriteMoviesModule',
-      });
+    loadChildren: './feature-modules/favourite-movies/favourite-movies.module#FavouriteMoviesModule'
+    // loadChildren: () => {
+    //   bus.emit({
+    //     action: 'module-loading-start',
+    //     data: 'FavouriteMoviesModule',
+    //   });
 
-      return import('./feature-modules/favourite-movies/favourite-movies.module')
-        .then(mod => mod.FavouriteMoviesModule)
-        .finally(() => {
-          bus.emit({
-            action: 'module-loading-end',
-            data: 'FavouriteMoviesModule',
-          });
-        });
-    },
+    //   return import('./feature-modules/favourite-movies/favourite-movies.module')
+    //     .then(mod => mod.FavouriteMoviesModule)
+    //     .finally(() => {
+    //       bus.emit({
+    //         action: 'module-loading-end',
+    //         data: 'FavouriteMoviesModule',
+    //       });
+    //     });
+    // },
   },
   {
     path: 'movies/:id',
-    loadChildren: () => {
-      bus.emit({
-        action: 'module-loading-start',
-        data: 'MovieDetailsModule',
-      });
+    loadChildren: './feature-modules/movie-details/movie-details.module#MovieDetailsModule'
+    // loadChildren: () => {
+    //   bus.emit({
+    //     action: 'module-loading-start',
+    //     data: 'MovieDetailsModule',
+    //   });
 
-      return import('./feature-modules/movie-details/movie-details.module')
-        .then(mod => mod.MovieDetailsModule)
-        .finally(() => {
-          bus.emit({
-            action: 'module-loading-end',
-            data: 'MovieDetailsModule',
-          });
-        });
-    },
+    //   return import('./feature-modules/movie-details/movie-details.module')
+    //     .then(mod => mod.MovieDetailsModule)
+    //     .finally(() => {
+    //       bus.emit({
+    //         action: 'module-loading-end',
+    //         data: 'MovieDetailsModule',
+    //       });
+    //     });
+    // },
   },
   {
     path: 'movies',
-    loadChildren: () => {
-      bus.emit({
-        action: 'module-loading-start',
-        data: 'MovieListModule',
-      });
+    loadChildren: './feature-modules/movie-list/movie-list.module#MovieListModule'
 
-      return import('./feature-modules/movie-list/movie-list.module')
-        .then(mod => mod.MovieListModule)
-        .finally(() => {
-          bus.emit({
-            action: 'module-loading-end',
-            data: 'MovieListModule',
-          });
-        });
-    },
+    // loadChildren: () => {
+    //   bus.emit({
+    //     action: 'module-loading-start',
+    //     data: 'MovieListModule',
+    //   });
+
+    //   return import('./feature-modules/movie-list/movie-list.module')
+    //     .then(mod => mod.MovieListModule)
+    //     .finally(() => {
+    //       bus.emit({
+    //         action: 'module-loading-end',
+    //         data: 'MovieListModule',
+    //       });
+    //     });
+    // },
   },
   {
     path: '**',

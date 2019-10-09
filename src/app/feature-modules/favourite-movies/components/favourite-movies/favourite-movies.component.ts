@@ -33,7 +33,7 @@ export class FavouriteMoviesComponent implements OnInit {
     }));
 
     this.tagsService.getUserTags().then((userTags) => {
-      const tagsInFilter = this.userSettings.favouritesSavedTagFilter;
+      const tagsInFilter = this.userSettings.favouritesSavedTagFilter || [];
 
       this.userTags = userTags;
       this.tagsControl.setValue(tagsInFilter);
