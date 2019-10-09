@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FavouriteMoviesRoutingModule } from './favourite-movies-routing.module';
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
+import { AngularMaterialModule } from 'src/app/angular-material.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { FavouriteMoviesComponent } from './components/favourite-movies/favourit
   ],
   imports: [
     CommonModule,
-    FavouriteMoviesRoutingModule
+    FavouriteMoviesRoutingModule,
+    AngularMaterialModule,
   ]
 })
 export class FavouriteMoviesModule { }

@@ -45,7 +45,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   onAddTag(tag: string) {
-    this.movieService.addMovieTag(this.movie.id, tag);
+    this.movieService.addMovieTag(this.movie, tag);
   }
 
   onRemoveTag(tag: string) {

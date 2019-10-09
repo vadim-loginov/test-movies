@@ -1,1 +1,8 @@
-<p>favourites works!</p>
+<div class="favourite-movies">
+	<mat-list class="favourite-movies__list">
+		<mat-list-item class="favourite-movies__item" *ngFor="let favourite of favourites">
+			<a class="favourite-movies__link" [routerLink]="['/movies', favourite.id]">{{ favourite.name }}</a>
+			<span class="favourite-movies__tags">({{ favourite.tags }})</span>
+		</mat-list-item>
+	</mat-list>
+</div>

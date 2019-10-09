@@ -44,14 +44,18 @@ export class MovieService {
     }
   }
 
-  addMovieTag(movieId, tag) {
+  addMovieTag(movie: IMovie, tag) {
     this.movieTags = this.movieTags || {};
 
-    if (!(movieId in this.movieTags)) {
-      this.movieTags[movieId] = { tags: [] };
+    if (!(movie.id in this.movieTags)) {
+      this.movieTags[movie.id] = {
+        id: movie.id,
+        name: movie.title,
+        tags: [],
+      };
     }
 
-    const tags = this.movieTags[movieId].tags;
+    const tags = this.movieTags[movie.id].tags;
 
     if (tags.indexOf(tag) < 0) {
       tags.push(tag);
