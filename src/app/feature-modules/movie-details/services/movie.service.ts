@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { MovieDetailsConfig } from '../movie-details.config';
 import { HttpClient } from '@angular/common/http';
-import { IMovie } from 'src/app/interfaces';
-import { UserSettingsService } from 'src/app/services/user-settings.service';
+
+import { TagsService } from 'src/app/common/services/common-tags.service';
+import { UserSettingsService } from 'src/app/common/services/user-settings.service';
+
+import { MovieDetailsConfig } from '../movie-details.config';
+import { IMovie } from 'src/app/common/interfaces';
 
 @Injectable()
 export class MovieService {
   private movieTags: any;
-  private userTags: string[];
 
   constructor(
     private http: HttpClient,
     private movieDetailsConfig: MovieDetailsConfig,
-    private userSettings: UserSettingsService
+    private userSettings: UserSettingsService,
+    private tagsService: TagsService,
   ) { }
 
   getMovieById(id: number|string): Promise<IMovie> {
@@ -26,21 +29,6 @@ export class MovieService {
       return Promise.resolve([]);
     } else {
       return Promise.resolve(this.movieTags[movieId].tags);
-    }
-  }
-
-  getUserTags(): Promise<string[]> {
-    this.userTags = this.userTags || this.userSettings.userTags;
-
-    return Promise.resolve(this.userTags || []);
-  }
-
-  addUserTag(tag) {
-    this.userTags = this.userTags || [];
-
-    if (this.userTags.indexOf(tag) < 0) {
-      this.userTags.push(tag);
-      this.userSettings.userTags = this.userTags;
     }
   }
 
@@ -60,7 +48,7 @@ export class MovieService {
     if (tags.indexOf(tag) < 0) {
       tags.push(tag);
       this.userSettings.movieTags = this.movieTags;
-      this.addUserTag(tag);
+      this.tagsService.addUserTag(tag);
     }
   }
 

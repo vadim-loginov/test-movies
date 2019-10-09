@@ -1,9 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MovieListConfig } from '../movie-list.config';
-import { IMovieListColumn, IGenre } from 'src/app/interfaces';
-import { UserSettingsService } from 'src/app/services/user-settings.service';
-import { Observable } from 'rxjs';
+import { IMovieListColumn, IGenre } from 'src/app/common/interfaces';
+import { UserSettingsService } from 'src/app/common/services/user-settings.service';
 
 @Injectable()
 export class MovieListService {

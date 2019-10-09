@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChange
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { MovieListService } from '../../services/movie-list.service';
-import { IMovieSearchResult } from 'src/app/interfaces';
+import { IMovieSearchResult } from 'src/app/common/interfaces';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({

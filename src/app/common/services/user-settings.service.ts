@@ -15,6 +15,9 @@ export class UserSettingsService {
   get userTags() { return this.get('userTags'); }
   set userTags(data) { this.save('userTags', data); }
 
+  get favouritesSavedTagFilter() { return this.get('favouritesSavedTagFilter'); }
+  set favouritesSavedTagFilter(data) { this.save('favouritesSavedTagFilter', data); }
+
   private get(settingName) {
     const savedSettings = localStorage.getItem('userSettings');
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MovieListService } from '../../services/movie-list.service';
-import { IMovieSearchResult, IMovieListColumn } from 'src/app/interfaces';
+import { IMovieSearchResult, IMovieListColumn } from 'src/app/common/interfaces';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
-import { UserSettingsService } from 'src/app/services/user-settings.service';
+import { UserSettingsService } from 'src/app/common/services/user-settings.service';
 
 interface Movie {
   title: string;
@@ -43,20 +43,17 @@ export class MovieListComponent implements OnInit {
     this.lastQuery = e.query;
     const searchResult: IMovieSearchResult = e.searchResult;
 
-    console.log('searchResult', searchResult);
     this.movieList = searchResult.results;
     this.totalMovies = searchResult.total_results;
   }
 
   onFilterColumnsSelectionChange(event: MatSelectChange) {
-    console.log('col select', event);
     this.columns = this.columns.map((column) => {
       column.selected = event.value.includes(column.name);
       return column;
     });
 
     this.userSettingsService.selectedColumnIds = this.getSelectedColumnIds();
-    console.log(this.columns);
   }
 
   onPaginatorChange(page: PageEvent) {

@@ -15,6 +15,13 @@ export interface IMovie {
   vote_count: number;
 }
 
+export interface IFavouriteMovie {
+  id: number;
+  name: string;
+  tags: string;
+  tagArray: string[];
+}
+
 export interface IMovieSearchResult {
   page: number;
   results: IMovie[];

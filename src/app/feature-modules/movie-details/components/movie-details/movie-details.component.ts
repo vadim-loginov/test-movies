@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { MovieService } from '../../services/movie.service';
+import { TagsService } from 'src/app/common/services/common-tags.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -17,6 +18,7 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
+    private tagsService: TagsService,
   ) { }
 
   ngOnInit() {
@@ -31,13 +33,12 @@ export class MovieDetailsComponent implements OnInit {
     Promise.all([
       this.movieService.getMovieById(movieId),
       this.movieService.getMovieTags(movieId),
-      this.movieService.getUserTags(),
+      this.tagsService.getUserTags(),
     ])
       .then((resolved) => {
         this.movie = resolved[0];
         this.movieTags = resolved[1];
         this.userTags = resolved[2];
-        console.log('MovieDetailsComponent', this);
       })
       .finally(() => {
         this.loading = false;

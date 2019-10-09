@@ -7,7 +7,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 import { MovieService } from './services/movie.service';
 import { MovieDetailsConfig } from './movie-details.config';
 import { HttpClientModule } from '@angular/common/http';
-import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
+import { httpInterceptorProviders } from 'src/app/common/http-interceptors/http-interceptors';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 import { MovieTagsComponent } from './components/movie-tags/movie-tags.component';
 import { ReactiveFormsModule } from '@angular/forms';

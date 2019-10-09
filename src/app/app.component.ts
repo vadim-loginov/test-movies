@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { MediaMatcherService } from './services/media-matcher.service';
+import { MediaMatcherService } from './common/services/media-matcher.service';
 import { Subscription } from 'rxjs';
-import { bus, BusEvent } from './services/bus.service';
+import { bus, BusEvent } from './common/services/bus.service';
 
 @Component({
   selector: 'app-root',

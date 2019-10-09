@@ -8,7 +8,7 @@ import { MovieListFilterComponent } from './components/movie-list-filter/movie-l
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovieListConfig } from './movie-list.config';
-import { httpInterceptorProviders } from 'src/app/services/http-interceptors/http-interceptors';
+import { httpInterceptorProviders } from 'src/app/common/http-interceptors/http-interceptors';
 import { AppCommonModule } from 'src/app/common/app-common.module';
 
 
