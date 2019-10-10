@@ -26,11 +26,13 @@ export class FavouriteMoviesComponent implements OnInit {
   ngOnInit() {
     const savedTags = this.userSettings.movieTags;
 
-    this.originalFavourites = Object.keys(savedTags).map((movieId) => ({
-      ...savedTags[movieId],
-      tagArray: savedTags[movieId].tags.slice(),
-      tags: savedTags[movieId].tags.join(', '),
-    }));
+    if (savedTags) {
+      this.originalFavourites = Object.keys(savedTags).map((movieId) => ({
+        ...savedTags[movieId],
+        tagArray: savedTags[movieId].tags.slice(),
+        tags: savedTags[movieId].tags.join(', '),
+      }));
+    }
 
     this.tagsService.getUserTags().then((userTags) => {
       const tagsInFilter = this.userSettings.favouritesSavedTagFilter || [];

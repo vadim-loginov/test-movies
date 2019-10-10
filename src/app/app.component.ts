@@ -35,24 +35,24 @@ export class AppComponent implements OnInit, OnDestroy {
     const loadingModules = [];
 
     // Show loader while modules are loading
-    this.subscriptions.push(
-      bus.subscribe((ev: BusEvent) => {
-        if (ev.action === 'module-loading-start') {
-          this.loading = true;
-          loadingModules.push(ev.data);
-        } else if (ev.action === 'module-loading-end') {
-          const moduleIndex = loadingModules.indexOf(ev.data);
+    // this.subscriptions.push(
+    //   bus.subscribe((ev: BusEvent) => {
+    //     if (ev.action === 'module-loading-start') {
+    //       this.loading = true;
+    //       loadingModules.push(ev.data);
+    //     } else if (ev.action === 'module-loading-end') {
+    //       const moduleIndex = loadingModules.indexOf(ev.data);
 
-          if (moduleIndex !== -1) {
-            loadingModules.splice(moduleIndex, 1);
-          }
+    //       if (moduleIndex !== -1) {
+    //         loadingModules.splice(moduleIndex, 1);
+    //       }
 
-          if (!loadingModules.length) {
-            this.loading = false;
-          }
-        }
-      })
-    );
+    //       if (!loadingModules.length) {
+    //         this.loading = false;
+    //       }
+    //     }
+    //   })
+    // );
 
     this.subscriptions.push(
       this.mediaMatcherService.onMobileQueryChange

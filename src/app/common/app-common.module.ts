@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { PosterPipe } from './pipes/poster.pipe';
+import { httpInterceptorProviders } from './http-interceptors/http-interceptors';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,9 @@ import { PosterPipe } from './pipes/poster.pipe';
   exports: [
     CommonModule,
     PosterPipe,
+  ],
+  providers: [
+    httpInterceptorProviders
   ]
 })
 export class AppCommonModule { }
