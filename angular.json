@@ -124,6 +124,12 @@
               "devServerTarget": "angular-movies:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/angular-movies/"
+          }
         }
       }
     }
