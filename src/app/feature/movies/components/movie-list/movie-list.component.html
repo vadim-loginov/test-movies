@@ -1,52 +1,32 @@
-<div class="movie-list g-fill-parent">
-	<app-movies-filter
-		class="movie-list__filter"
-		(search)="onFilterSearch($event)"
-		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
-		[columns]="columnNames"
-		[selectedColumns]="selectedColumnNames"
-	></app-movies-filter>
-
-	<div class="g-content movie-list__content">
-		<div class="movie-list__row movie-list__row--head" *ngIf="movieList.length">
-			<div
-				*ngFor="let column of getSelectedColumns()"
-				class="movie-list__col movie-list__col--{{column.id}}"
-			>
-				{{ column.name }}
-			</div>
-		</div>
-
+<div class="g-content movie-list__content">
+	<div class="movie-list__row movie-list__row--head" *ngIf="movieList.length">
 		<div
-			class="movie-list__row"
-			*ngFor="let movie of movieList"
+			*ngFor="let column of getSelectedColumns()"
+			class="movie-list__col movie-list__col--{{column.id}}"
 		>
-			<div class="movie-list__col movie-list__col--poster" *ngIf="isColumnSelected('poster')">
-				<a [routerLink]="['/movies', movie.id]">
-					<img *ngIf="!movie.poster_path" src="assets/no-poster.png" alt="">
-					<img *ngIf="movie.poster_path" src="{{ movie.poster_path | poster}}" alt="">
-				</a>
-			</div>
-			<div class="movie-list__col movie-list__col--title" *ngIf="isColumnSelected('title')">
-				<a [routerLink]="['/movies', movie.id]"> {{ movie.title }}</a>
-			</div>
-			<div class="movie-list__col movie-list__col--language" *ngIf="isColumnSelected('language')">{{ movie.original_language }}</div>
-			<div class="movie-list__col movie-list__col--release" *ngIf="isColumnSelected('release')">{{ movie.release_date | date }}</div>
-			<div class="movie-list__col movie-list__col--genre" *ngIf="isColumnSelected('genre')">
-				<div *ngFor="let genre of genresToNames(movie.genre_ids)">{{ genre }}</div>
-			</div>
-			<div class="movie-list__col movie-list__col--popularity" *ngIf="isColumnSelected('popularity')">{{ movie.popularity }}</div>
-			<div class="movie-list__col movie-list__col--overview" *ngIf="isColumnSelected('overview')">{{ movie.overview }}</div>
+			{{ column.name }}
 		</div>
 	</div>
 
-	<div class="movie-list__paginator" *ngIf="movieList.length">
-		<mat-paginator
-			(page)="onPaginatorChange($event)"
-			[length]="totalMovies"
-			[pageSize]="pageSize"
-			[pageSizeOptions]="[]">
-		</mat-paginator>
+	<div
+		class="movie-list__row"
+		*ngFor="let movie of movieList"
+	>
+		<div class="movie-list__col movie-list__col--poster" *ngIf="isColumnSelected('poster')">
+			<a [routerLink]="['/movies', movie.id]">
+				<img *ngIf="!movie.poster_path" src="assets/no-poster.png" alt="">
+				<img *ngIf="movie.poster_path" src="{{ movie.poster_path | poster}}" alt="">
+			</a>
+		</div>
+		<div class="movie-list__col movie-list__col--title" *ngIf="isColumnSelected('title')">
+			<a [routerLink]="['/movies', movie.id]"> {{ movie.title }}</a>
+		</div>
+		<div class="movie-list__col movie-list__col--language" *ngIf="isColumnSelected('language')">{{ movie.original_language }}</div>
+		<div class="movie-list__col movie-list__col--release" *ngIf="isColumnSelected('release')">{{ movie.release_date | date }}</div>
+		<div class="movie-list__col movie-list__col--genre" *ngIf="isColumnSelected('genre')">
+			<div *ngFor="let genre of genresToNames(movie.genre_ids)">{{ genre }}</div>
+		</div>
+		<div class="movie-list__col movie-list__col--popularity" *ngIf="isColumnSelected('popularity')">{{ movie.popularity }}</div>
+		<div class="movie-list__col movie-list__col--overview" *ngIf="isColumnSelected('overview')">{{ movie.overview }}</div>
 	</div>
 </div>
-

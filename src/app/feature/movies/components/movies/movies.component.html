@@ -1,0 +1,22 @@
+<div class="movies g-fill-parent">
+	<app-movies-filter
+		(search)="onFilterSearch($event)"
+		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
+		[columns]="columnNames"
+		[selectedColumns]="selectedColumnNames"
+	></app-movies-filter>
+
+	<app-movie-list
+		[movieList]="movieList"
+		[columns]="columns"
+	></app-movie-list>
+
+	<mat-paginator
+		*ngIf="movieList.length"
+		(page)="onPaginatorChange($event)"
+		[length]="totalMovies"
+		[pageSize]="pageSize"
+		[pageSizeOptions]="[]">
+	</mat-paginator>
+</div>
+
