@@ -7,15 +7,15 @@ import { AppCommonModule } from 'src/app/common/app-common.module';
 import { MovieListRoutingModule } from './movie-list-routing.module';
 
 import { MovieListComponent } from './components/movie-list/movie-list.component';
-import { MovieListService } from './services/movie-list.service';
-import { MovieListFilterComponent } from './components/movie-list-filter/movie-list-filter.component';
-import { MovieListConfig } from './movie-list.config';
+import { MoviesService } from './services/movies.service';
+import { MoviesFilterComponent } from './components/movies-filter/movies-filter.component';
+import { MoviesConfig } from './movies.config';
 
 
 @NgModule({
   declarations: [
     MovieListComponent,
-    MovieListFilterComponent,
+    MoviesFilterComponent,
   ],
   imports: [
     AppCommonModule,
@@ -25,8 +25,8 @@ import { MovieListConfig } from './movie-list.config';
     ReactiveFormsModule
   ],
   providers: [
-    MovieListService,
-    MovieListConfig,
+    MoviesService,
+    MoviesConfig,
   ]
 })
-export class MovieListModule { }
+export class MoviesModule { }

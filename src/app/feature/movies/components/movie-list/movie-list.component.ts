@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MovieListService } from '../../services/movie-list.service';
+import { MoviesService } from '../../services/movies.service';
 import { IMovieSearchResult, IMovieListColumn } from 'src/app/common/interfaces';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
@@ -26,14 +26,14 @@ export class MovieListComponent implements OnInit {
   selectedColumnNames: string[];
 
   constructor(
-    private movieListService: MovieListService,
+    private moviesService: MoviesService,
     private userSettingsService: UserSettingsService,
   ) { }
 
   ngOnInit() {
-    this.movieListService.init()
+    this.moviesService.init()
       .then(() => {
-        this.columns = this.movieListService.getColumns();
+        this.columns = this.moviesService.getColumns();
         this.columnNames = this.getColumnNames();
         this.selectedColumnNames = this.getSelectedColumnNames();
       });
@@ -57,7 +57,7 @@ export class MovieListComponent implements OnInit {
   }
 
   onPaginatorChange(page: PageEvent) {
-    this.movieListService.searchMovies(this.lastQuery, page.pageIndex + 1)
+    this.moviesService.searchMovies(this.lastQuery, page.pageIndex + 1)
       .subscribe((searchResult: IMovieSearchResult) => {
         this.movieList = searchResult.results;
         this.totalMovies = searchResult.total_results;
@@ -91,6 +91,6 @@ export class MovieListComponent implements OnInit {
   }
 
   genresToNames(genreIds) {
-    return genreIds.map((genreId) => this.movieListService.genreIdNameMap[genreId]);
+    return genreIds.map((genreId) => this.moviesService.genreIdNameMap[genreId]);
   }
 }

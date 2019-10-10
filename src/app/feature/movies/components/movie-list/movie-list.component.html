@@ -1,11 +1,11 @@
 <div class="movie-list g-fill-parent">
-	<app-movie-list-filter
+	<app-movies-filter
 		class="movie-list__filter"
 		(search)="onFilterSearch($event)"
 		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
 		[columns]="columnNames"
 		[selectedColumns]="selectedColumnNames"
-	></app-movie-list-filter>
+	></app-movies-filter>
 
 	<div class="g-content movie-list__content">
 		<div class="movie-list__row movie-list__row--head" *ngIf="movieList.length">

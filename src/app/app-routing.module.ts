@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'movies',
-    loadChildren: './feature/movie-list/movie-list.module#MovieListModule',
+    loadChildren: './feature/movies/movies.module#MoviesModule',
   },
   {
     path: '**',

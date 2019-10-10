@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MovieListConfig } from '../movie-list.config';
+import { MoviesConfig } from '../movies.config';
 import { IMovieListColumn, IGenre } from 'src/app/common/interfaces';
 import { UserSettingsService } from 'src/app/common/services/user-settings.service';
 
 @Injectable()
-export class MovieListService {
+export class MoviesService {
   private initialized = false;
 
   genres = null;
@@ -13,7 +13,7 @@ export class MovieListService {
 
   constructor(
     private http: HttpClient,
-    private movieListCongif: MovieListConfig,
+    private moviesCongif: MoviesConfig,
     private userSettingsService: UserSettingsService,
   ) {}
 
@@ -29,7 +29,7 @@ export class MovieListService {
   }
 
   searchMovies(query: string, page: number = 1) {
-    return this.http.get(`${this.movieListCongif.api.searchMoviesUrl}?query=${query}&page=${page}`);
+    return this.http.get(`${this.moviesCongif.api.searchMoviesUrl}?query=${query}&page=${page}`);
   }
 
   getColumns() {
@@ -83,7 +83,7 @@ export class MovieListService {
   }
 
   private getGenres() {
-    return this.http.get(this.movieListCongif.api.getGenres).toPromise()
+    return this.http.get(this.moviesCongif.api.getGenres).toPromise()
       .then((resp: any) => {
         this.genres = resp.genres;
 
