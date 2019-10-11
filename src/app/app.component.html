@@ -14,7 +14,15 @@
         routerLinkActive="active"
       >{{menuLink.title}}</a>
     </div>
-    <a mat-button href="https://github.com/vloginov/angular-movies" target="_blank" class="repo-link">GitHub</a>
+    <button mat-icon-button aria-label="Switch to Russian language" class="g-ml-auto">
+      <mat-icon svgIcon="flag-ru" aria-hidden="false" aria-label="Flag of Russia"></mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Switch to English language">
+      <mat-icon svgIcon="flag-us" aria-hidden="false" aria-label="Flag of USA"></mat-icon>
+    </button>
+    <a mat-icon-button title="Go to project repository on GitHub" href="https://github.com/vloginov/angular-movies/" target="_blank">
+      <mat-icon svgIcon="github-logo" aria-hidden="false" aria-label="GitHub logo"></mat-icon>
+    </a>
   </mat-toolbar>
 
   <mat-sidenav-container class="app-component__sidenav-container">

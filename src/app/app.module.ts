@@ -9,6 +9,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { PageNotFoundComponent } from './common/components/page-not-found/page-not-found.component';
 import { AppConfig } from './app.config';
 import { AppCommonModule } from './common/app-common.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AppCommonModule } from './common/app-common.module';
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    HttpClientModule,
     AppCommonModule,
     AppRoutingModule,
   ],

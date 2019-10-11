@@ -2,6 +2,8 @@ import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { MediaMatcherService } from './common/services/media-matcher.service';
 import { Subscription } from 'rxjs';
 import { bus, BusEvent } from './common/services/bus.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -29,10 +31,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private mediaMatcherService: MediaMatcherService,
-  ) {}
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+  ) {
+    iconRegistry.addSvgIcon('flag-ru', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-ru.svg'));
+    iconRegistry.addSvgIcon('flag-us', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-us.svg'));
+    iconRegistry.addSvgIcon('github-logo', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/github-logo.svg'));
+  }
 
   ngOnInit() {
-    const loadingModules = [];
+    // const loadingModules = [];
 
     // Show loader while modules are loading
     // this.subscriptions.push(
