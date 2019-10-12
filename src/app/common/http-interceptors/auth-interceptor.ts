@@ -13,11 +13,16 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const apiKeySeparator = req.url.includes('?') ? '&' : '?';
+    const prefix = this.appConfig.movieDbApiPrefix;
+    let reqWithProperUrl = req;
 
-    const reqWithProperUrl = req.clone({
-      url: req.url + apiKeySeparator + this.appConfig.movieDbApiKey,
-    });
+    if (req.url.slice(0, prefix.length) === prefix) {
+      const apiKeySeparator = req.url.includes('?') ? '&' : '?';
+
+      reqWithProperUrl = req.clone({
+        url: req.url + apiKeySeparator + this.appConfig.movieDbApiKey,
+      });
+    }
 
     return next.handle(reqWithProperUrl);
   }

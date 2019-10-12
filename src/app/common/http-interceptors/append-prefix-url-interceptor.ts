@@ -13,9 +13,14 @@ export class AppendPrefixUrlInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const reqWithProperUrl = req.clone({
-      // url: this.appConfig.movieDbApiPrefix + req.url,
-    });
+    const marker = this.appConfig.movieDbApiMarker;
+    let reqWithProperUrl = req;
+
+    if (req.url.slice(0, marker.length) === marker) {
+      reqWithProperUrl = req.clone({
+        url: this.appConfig.movieDbApiPrefix + req.url.slice(marker.length),
+      });
+    }
 
     return next.handle(reqWithProperUrl);
   }
