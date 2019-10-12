@@ -4,7 +4,7 @@
 			*ngFor="let column of getSelectedColumns()"
 			class="movie-list__col movie-list__col--{{column.id}}"
 		>
-			{{ column.name }}
+			{{ 'movies.list.columns.' + column.id | translate }}
 		</div>
 	</div>
 

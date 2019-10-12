@@ -10,11 +10,11 @@
 	<img *ngIf="!loading" class="movie-details__poster" src="{{movie.poster_path | poster:154}}" />
 	<div *ngIf="!loading" class="movie-details__info">
 		<p><strong>{{ movie.title }}</strong></p>
-		<p *ngIf="movie.tagline"><strong>Слоган:</strong> <em>{{ movie.tagline }}</em></p>
-		<p><strong>Описание:</strong> {{ movie.overview }}</p>
-		<p><strong>Год:</strong> {{ movie.release_date | date }}</p>
-		<p><strong>Бюджет:</strong> {{ movie.budget | currency:'USD' }}</p>
-		<p><strong>Сборы в мире:</strong> {{ movie.revenue | currency:'USD' }}</p>
+		<p *ngIf="movie.tagline"><strong>{{ 'movie-details.tagline' | translate }}:</strong> <em>{{ movie.tagline }}</em></p>
+		<p><strong>{{ 'movie-details.overview' | translate }}:</strong> {{ movie.overview }}</p>
+		<p><strong>{{ 'movie-details.release_date' | translate }}:</strong> {{ movie.release_date | date }}</p>
+		<p><strong>{{ 'movie-details.budget' | translate }}:</strong> {{ movie.budget | currency:'USD' }}</p>
+		<p><strong>{{ 'movie-details.revenue' | translate }}:</strong> {{ movie.revenue | currency:'USD' }}</p>
 		<p><a href="https://www.imdb.com/title/{{ movie.imdb_id }}" target="_blank">IMDB</a></p>
 		<app-movie-tags
 			[movieTags]="movieTags"

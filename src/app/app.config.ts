@@ -8,4 +8,6 @@ export class AppConfig {
   movieDbApiMarker = '{mdb}';
   movieDbApiKey = 'api_key=2cdb1b1199194ebc0348f30796fa41c8';
   movieDbImgPosterPath = 'https://image.tmdb.org/t/p/';
+
+  defaultLanguage = 'ru';
 }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { bus, BusEvent } from './common/services/bus.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocaleService } from './common/services/locale.service';
 
 @Component({
   selector: 'app-root',
@@ -20,19 +21,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
   mainMenuLinks = [
     {
-      title: 'Home',
+      title: 'header.nav.home',
       link: '/movies',
     },
     {
-      title: 'Favorite movies',
+      title: 'header.nav.favourites',
       link: '/favourites',
     }
   ];
 
   constructor(
     private mediaMatcherService: MediaMatcherService,
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
+    private localeService: LocaleService,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
   ) {
     iconRegistry.addSvgIcon('flag-ru', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-ru.svg'));
     iconRegistry.addSvgIcon('flag-us', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-us.svg'));
@@ -78,5 +80,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach((subscription) => { subscription.unsubscribe(); });
+  }
+
+  setLanguage(lang) {
+    this.localeService.setLanguage(lang);
   }
 }

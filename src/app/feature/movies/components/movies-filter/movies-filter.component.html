@@ -1,6 +1,6 @@
 <mat-toolbar class="movies-filter">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Search for movies" [formControl]="queryControl">
+    <input matInput placeholder="{{ 'movies.filter.search.placeholder' | translate }}" [formControl]="queryControl">
   </mat-form-field>
   <mat-form-field>
     <mat-label>Columns</mat-label>

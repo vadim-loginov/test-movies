@@ -1,7 +1,7 @@
 <div class="favourite-movies">
   <div class="g-content">
     <mat-form-field class="favourite-movies__filter">
-      <mat-label>Tag filter</mat-label>
+      <mat-label>{{ 'favourites.tag.placeholder' | translate }}</mat-label>
       <mat-select
         [formControl]="tagsControl"
         multiple

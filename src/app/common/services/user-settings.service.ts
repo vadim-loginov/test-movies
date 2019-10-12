@@ -18,6 +18,9 @@ export class UserSettingsService {
   get favouritesSavedTagFilter() { return this.get('favouritesSavedTagFilter'); }
   set favouritesSavedTagFilter(data) { this.save('favouritesSavedTagFilter', data); }
 
+  get userLanguage() { return this.get('userLanguage'); }
+  set userLanguage(data) { this.save('userLanguage', data); }
+
   private get(settingName) {
     const savedSettings = localStorage.getItem('userSettings');
 
