@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { MovieService } from '../../services/movie.service';
 import { TagsService } from 'src/app/common/services/common-tags.service';
+import { MovieDetailsTranslations } from '../../locale/movie-details.translations';
+import { LocaleService } from 'src/app/common/services/locale.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -19,7 +21,12 @@ export class MovieDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private movieService: MovieService,
     private tagsService: TagsService,
-  ) { }
+    movieDetailsTranslations: MovieDetailsTranslations,
+    localeService: LocaleService,
+  ) {
+    localeService.addTranslations('ru', movieDetailsTranslations.ru);
+    localeService.addTranslations('en', movieDetailsTranslations.en);
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {

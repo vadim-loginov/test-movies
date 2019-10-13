@@ -5,6 +5,8 @@ import { MoviesService } from '../../services/movies.service';
 import { IMovie, IMovieSearchResult, IMovieListColumn } from 'src/app/common/interfaces';
 import { MatSelectChange } from '@angular/material/select';
 import { UserSettingsService } from 'src/app/common/services/user-settings.service';
+import { LocaleService } from 'src/app/common/services/locale.service';
+import { MoviesTranslations } from '../../locale/movies.translations';
 
 @Component({
   selector: 'app-movies',
@@ -23,7 +25,12 @@ export class MoviesComponent implements OnInit {
   constructor(
     private moviesService: MoviesService,
     private userSettingsService: UserSettingsService,
-  ) { }
+    localeService: LocaleService,
+    moviesTranslations: MoviesTranslations,
+  ) {
+    localeService.addTranslations('ru', moviesTranslations.ru);
+    localeService.addTranslations('en', moviesTranslations.en);
+  }
 
   ngOnInit() {
     this.moviesService.init()

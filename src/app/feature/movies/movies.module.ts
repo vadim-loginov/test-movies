@@ -11,6 +11,7 @@ import { MoviesService } from './services/movies.service';
 import { MoviesFilterComponent } from './components/movies-filter/movies-filter.component';
 import { MoviesConfig } from './movies.config';
 import { MoviesComponent } from './components/movies/movies.component';
+import { MoviesTranslations } from './locale/movies.translations';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MoviesComponent } from './components/movies/movies.component';
   providers: [
     MoviesService,
     MoviesConfig,
+    MoviesTranslations,
   ]
 })
 export class MoviesModule { }

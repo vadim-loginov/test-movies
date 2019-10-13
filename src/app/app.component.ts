@@ -1,10 +1,10 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { MediaMatcherService } from './common/services/media-matcher.service';
 import { Subscription } from 'rxjs';
-import { bus, BusEvent } from './common/services/bus.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LocaleService } from './common/services/locale.service';
+import { CommonTranslations } from './common/locale/common.translations';
 
 @Component({
   selector: 'app-root',
@@ -33,12 +33,16 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private mediaMatcherService: MediaMatcherService,
     private localeService: LocaleService,
-    private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    commmonTranslations: CommonTranslations,
   ) {
     iconRegistry.addSvgIcon('flag-ru', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-ru.svg'));
     iconRegistry.addSvgIcon('flag-us', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/flag-us.svg'));
     iconRegistry.addSvgIcon('github-logo', sanitizer.bypassSecurityTrustResourceUrl('assets/svg/github-logo.svg'));
+
+    localeService.addTranslations('ru', commmonTranslations.ru);
+    localeService.addTranslations('en', commmonTranslations.en);
   }
 
   ngOnInit() {

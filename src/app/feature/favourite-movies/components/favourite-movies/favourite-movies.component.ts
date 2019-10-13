@@ -6,6 +6,8 @@ import { intersection } from 'lodash';
 import { UserSettingsService } from 'src/app/common/services/user-settings.service';
 import { TagsService } from 'src/app/common/services/common-tags.service';
 import { IFavouriteMovie } from 'src/app/common/interfaces';
+import { FavouriteMoviesTranslations } from '../../locale/favourite-movies.translations';
+import { LocaleService } from 'src/app/common/services/locale.service';
 
 @Component({
   selector: 'app-favourite-movies',
@@ -21,7 +23,12 @@ export class FavouriteMoviesComponent implements OnInit {
   constructor(
     private userSettings: UserSettingsService,
     private tagsService: TagsService,
-  ) { }
+    favouritesTranslations: FavouriteMoviesTranslations,
+    localeService: LocaleService,
+  ) {
+    localeService.addTranslations('ru', favouritesTranslations.ru);
+    localeService.addTranslations('en', favouritesTranslations.en);
+  }
 
   ngOnInit() {
     const savedTags = this.userSettings.movieTags;

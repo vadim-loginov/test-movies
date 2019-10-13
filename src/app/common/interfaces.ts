@@ -39,3 +39,8 @@ export interface IGenre {
   id: number;
   name: string;
 }
+
+export interface ITranslations {
+  ru: Map<string, string>;
+  en: Map<string, string>;
+}

@@ -6,6 +6,7 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { FavouriteMoviesRoutingModule } from './favourite-movies-routing.module';
 
 import { FavouriteMoviesComponent } from './components/favourite-movies/favourite-movies.component';
+import { FavouriteMoviesTranslations } from './locale/favourite-movies.translations';
 
 
 @NgModule({
@@ -17,6 +18,9 @@ import { FavouriteMoviesComponent } from './components/favourite-movies/favourit
     FavouriteMoviesRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
+  ],
+  providers: [
+    FavouriteMoviesTranslations,
   ]
 })
 export class FavouriteMoviesModule { }

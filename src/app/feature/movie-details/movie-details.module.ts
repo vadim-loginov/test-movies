@@ -10,6 +10,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
 import { MovieService } from './services/movie.service';
 import { MovieDetailsConfig } from './movie-details.config';
 import { MovieTagsComponent } from './components/movie-tags/movie-tags.component';
+import { MovieDetailsTranslations } from './locale/movie-details.translations';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MovieTagsComponent } from './components/movie-tags/movie-tags.component
   providers: [
     MovieService,
     MovieDetailsConfig,
+    MovieDetailsTranslations,
   ]
 })
 export class MovieDetailsModule { }
