@@ -15,7 +15,7 @@ export class LocaleService {
     private appConfig: AppConfig,
     private userSettingsService: UserSettingsService,
   ) {
-    this.currentLanguage = this.userSettingsService.userLanguage || this.appConfig.defaultLanguage;
+    this.setLanguage(this.userSettingsService.userLanguage || this.appConfig.defaultLanguage);
   }
 
   translate(key) {
@@ -32,6 +32,7 @@ export class LocaleService {
     if (lang in this) {
       this.currentLanguage = lang;
       this.userSettingsService.userLanguage = lang;
+      document.querySelector('html').setAttribute('lang', lang);
     }
   }
 

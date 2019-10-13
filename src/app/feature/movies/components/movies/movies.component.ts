@@ -19,8 +19,8 @@ export class MoviesComponent implements OnInit {
   lastQuery: string;
   pageSize = 20;
   columns: IMovieListColumn[];
-  columnNames: string[];
-  selectedColumnNames: string[];
+  columnIds: string[] = [];
+  selectedColumnIds: string[] = [];
 
   constructor(
     private moviesService: MoviesService,
@@ -36,14 +36,14 @@ export class MoviesComponent implements OnInit {
     this.moviesService.init()
       .then(() => {
         this.columns = this.moviesService.getColumns();
-        this.columnNames = this.getColumnNames();
-        this.selectedColumnNames = this.getSelectedColumnNames();
+        this.columnIds = this.getColumnIds();
+        this.selectedColumnIds = this.getSelectedColumnIds();
       });
   }
 
   onFilterColumnsSelectionChange(event: MatSelectChange) {
     this.columns = this.columns.map((column) => {
-      column.selected = event.value.includes(column.name);
+      column.selected = event.value.includes(column.id);
       return column;
     });
 
@@ -56,11 +56,11 @@ export class MoviesComponent implements OnInit {
     return this.columns ? this.columns.reduce(reducer, []) : [];
   }
 
-  getColumnNames() {
-    return this.columns ? this.columns.map(column => column.name) : [];
+  getColumnIds() {
+    return this.columns ? this.columns.map(column => column.id) : [];
   }
 
-  getSelectedColumnNames() {
+  getSelectedColumn() {
     const reducer = (acc, curr) => acc.concat(curr.selected ? [curr.name] : []);
 
     return this.columns ? this.columns.reduce(reducer, []) : [];

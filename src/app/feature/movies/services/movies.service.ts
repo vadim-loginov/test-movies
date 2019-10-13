@@ -57,7 +57,7 @@ export class MoviesService {
       {
         id: 'genre',
         name: 'Genre',
-        selected: false,
+        selected: true,
       },
       {
         id: 'popularity',

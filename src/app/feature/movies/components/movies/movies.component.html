@@ -2,8 +2,8 @@
 	<app-movies-filter
 		(search)="onFilterSearch($event)"
 		(columnsSelectionChange)="onFilterColumnsSelectionChange($event)"
-		[columns]="columnNames"
-		[selectedColumns]="selectedColumnNames"
+		[columns]="columnIds"
+		[selectedColumns]="selectedColumnIds"
 	></app-movies-filter>
 
 	<app-movie-list
