@@ -1,6 +1,6 @@
 # AngularMovies
 
-Demo https://vloginov.github.io/angular-movies/
+[Demo](https://vloginov.github.io/test-movies/)
 
 ## Описание
 
